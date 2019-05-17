@@ -1,0 +1,14 @@
+{
+  "sixteenthKarmapa": {
+    "meditationName": "16th Karmapa",
+    "meditationType": "GuruYoga",
+    "repetitions": 108,
+    "newRepValue": 3
+  },
+  "limitlessLight": {
+    "meditationName": "Limitless Light",
+    "meditationType": "Yidam Practice",
+    "repetitions": 1080,
+    "newRepValue": 9
+  }
+}

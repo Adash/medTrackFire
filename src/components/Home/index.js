@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './App.css';
-import MeditationTrackerBox from './MeditationTrackerBox';
-import DisplayHistory from './DisplayHistory';
-import FormElement from './FormElement';
-import inData from './inData';
+import './Home.css';
+import TrackerBox from '../TrackerBox';
+import DisplayHistory from '../DisplayHistory';
+import FormElement from '../FormElement';
+import inData from '../../inData';
 
-class App extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -118,7 +118,7 @@ class App extends Component {
           { this.state.showForm ? "Hide": "Show" } Form
         </button>
         </header>        
-        <MeditationTrackerBox 
+        <TrackerBox 
           meditations= { meditations }  
           addNewValue= { this.addNewValue }
           handleKeyPress= { this.handleKeyPress }
@@ -141,4 +141,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
