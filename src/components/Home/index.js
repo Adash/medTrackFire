@@ -4,68 +4,56 @@ import TrackerBox from '../TrackerBox';
 import DisplayHistory from '../DisplayHistory';
 import FormElement from '../FormElement';
 import Header from '../Header';
-import inData from '../../inData';
+//import inData from '../../inData';
+import { withFirebase } from '../Firebase';
 
-class Home extends Component {
+class HomeBase extends Component {
   constructor(props) {
     super(props);
 
     this.addNewValue = this.addNewValue.bind(this);
-    this.handleNewValueChange = this.handleNewValueChange.bind(this);
     this.removeHistoryItem = this.removeHistoryItem.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
   }
 
   state = {
-    meditations: inData,
+    meditations: [],
     history: [],
   }
 
 
-  addNewValue(medKey) {
-    const medClone = Object.assign({}, this.state.meditations);
-    const newValue = parseInt(this.state.meditations[medKey].newRepValue, 10);;
-    const history = this.state.history;
-    const date = new Date();
-    const time = date.toDateString();
-    const medName = this.state.meditations[medKey].meditationName;
-    
-    medClone[medKey].repetitions += newValue;  
+  addNewValue(value, thisMed) {
+    //const medClone = Object.assign({}, this.state.meditations);
+    const { uid } = thisMed;
+    const newValue = parseInt(value, 10);;
+    //const history = this.state.history;
+    //const date = new Date();
+    //const time = date.toDateString();
+    //const medName = this.state.meditations[medKey].meditationName;
+    thisMed.repetitions += newValue;  
+    console.log(thisMed)
+    // this.setState({
+    //     history: history.concat([
+    //       {
+    //         name: medName,
+    //         repetitions: newValue,
+    //         date: time,
+    //         medKey: medKey,
+    //       }])
+    // });
+    // const medClone = Object.assign({}, this.state.meditations);
+    // medClone = medClone[uid].newRepValue = value;   
 
-    this.setState({
-        meditations: medClone,
-        history: history.concat([
-          {
-            name: medName,
-            repetitions: newValue,
-            date: time,
-            medKey: medKey,
-          }])
-    });
+    this.props.firebase.meditation(uid).set(thisMed);
   }
 
-  handleNewValueChange = (event, medName) => {
-    const value = event.target.value;
-    if ( isNaN(value) === false ) {
-      const medClone = Object.assign({}, this.state.meditations);
-      medClone[medName].newRepValue = value;   
-
-      this.setState({
-          meditations: medClone, 
-          showForm: false,
-      });
-    }  
-  }
 
   removeHistoryItem(entryNo, medKey, repetitions) {
     const newHistory = this.state.history.filter(
       (value, index)=> index !== entryNo
     );
-    console.log(newHistory);
-
-    //try to take this bit out to separte function and change it 
-    // in a way that it can be also called from addNewValue function
+    //console.log(newHistory);
 
     const medClone = Object.assign({}, this.state.meditations);
     medClone[medKey].repetitions -= repetitions;  
@@ -82,18 +70,13 @@ class Home extends Component {
       meditationName: input.name,
       meditationType: input.type,
       repetitions: repetitions,
-      newRepValue: 0,
     }
 
-    let medKey = input.name.replace(/\s+/g, '').toLowerCase();
-    if ( !(isNaN(medKey.charAt(0))) ) { medKey = 'a' + medKey };
-    console.log(this.state.meditations[medKey]);
-    const medClone = Object.assign({ [medKey]:{} }, this.state.meditations);
-    medClone[medKey] = newMeditation;   
-
-    this.setState({
-      meditations: medClone,
-    }); 
+    //let medKey = input.name.replace(/\s+/g, '').toLowerCase();
+    //if ( !(isNaN(medKey.charAt(0))) ) { medKey = 'a' + medKey };
+    //const medClone = Object.assign({ [medKey]:{} }, this.state.meditations);
+    //medClone[medKey] = newMeditation;   
+    this.props.firebase.meditations().push(newMeditation);
   }
 
   toggleForm() {
@@ -101,17 +84,42 @@ class Home extends Component {
       showForm: !this.state.showForm
     })
   }
+  
+  componentDidMount() {
+    this.setState({loading: true});
+  
+    this.props.firebase.meditations().on('value', snapshot => {
+      const meditationsObject = snapshot.val();
+
+      if (meditationsObject) {
+        const meditationsList = Object.keys(meditationsObject).map(key => ({
+          ...meditationsObject[key],
+          uid: key,
+        }));
+        this.setState({meditations: meditationsList});
+        //console.log(meditationsList);
+        //console.log('loaded');
+        this.setState({loading: false});
+      } else {
+        this.setState({loading: false});
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.props.firebase.messages().off();
+  }
 
 
   render() {
-    const { meditations } = this.state;
-    const { history } = this.state
+    const { meditations, history } = this.state;
 
     return (
       <div className="App container">
         <Header 
           toggleForm={ this.toggleForm }
           showForm={ this.state.showForm }
+          loading={ this.state.loading }
         />      
         <TrackerBox 
           meditations= { meditations }  
@@ -136,4 +144,6 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const HomePage = withFirebase(HomeBase);
+
+export default HomePage;

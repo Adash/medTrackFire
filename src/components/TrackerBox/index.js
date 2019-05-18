@@ -5,7 +5,6 @@ class TrackerBox extends Component {
     super(props);
 
     this.state = {
-      newRepValue: 0  // propably deprecated - to be removed
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -13,24 +12,31 @@ class TrackerBox extends Component {
 
   }
 
-  handleSubmit(key){
+  handleSubmit(thisMed){
 //  const newValue = parseInt(this.state.newRepValue, 10);
-    this.props.addNewValue(key);
+    this.props.addNewValue(this.state[thisMed.uid], thisMed);
 }
 
-  onKeyPress(event, key){
+  onKeyPress(event, thisMed){
     if (event.key === 'Enter') {
-      this.handleSubmit(key);
+      this.handleSubmit(thisMed);
     }
+  }
+  
+  handleNewValueChange = (event, uid) => {
+    const value = parseInt(event.target.value, 10)
+    this.setState({[uid]: value})
   }
     
   render() {
     const meditations = Object.keys(this.props.meditations).map(
       (key)=> {
         const thisMed = this.props.meditations[key];
+        const { uid } = thisMed;
+        const inputField = this.state[uid] ? this.state[uid] : ''
         return (
           <div 
-            key={key} 
+            key={uid} 
             className='card-body text-center card medcard'
           >
             <h5 className='card-title'> 
@@ -45,13 +51,15 @@ class TrackerBox extends Component {
                 className="form-control"
                 name='newRepetitions'
                 type='text'
-                value={ thisMed.newRepValue }
-                onChange= { (event)=>this.props.handleNewValueChange(event, key) }
-                onKeyPress= { (event)=>this.onKeyPress(event, key) }
+                value={ inputField }
+                onChange= { event => this.handleNewValueChange(event, uid) }
+                onKeyPress= { event => this.onKeyPress(event, thisMed) }
             ></input>
               <div className="input-group-append">
-                <button className='btn btn-outline-primary'
-                  onClick={ ()=> this.props.addNewValue(key) }
+                <button 
+                  className='btn btn-outline-primary'
+                  type="submit"
+                  onClick={ () => this.handleSubmit(thisMed) }
                   > add mantras 
                 </button>
               </div>

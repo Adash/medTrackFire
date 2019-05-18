@@ -7,18 +7,12 @@ class Firebase {
   constructor() {
     app.initializeApp(config);
 
-    /* Helper */
-    this.serverValue = app.database.ServerValue;
-
+    console.log('initialising Firebase');
     this.auth = app.auth();
     this.db = app.database();
   }
 
   // *** Auth API ***
-
-  fbCreateUser = (email, password) => (
-    this.auth.createUserWithEmailAndPassword(email, password)
-  )
 
 
   fbSignIn = (email, password) => (
@@ -30,19 +24,15 @@ class Firebase {
     return this.auth.signOut()
   };
 
-  fbPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-
-  fbPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
-
   user = uid => this.db.ref(`users/${uid}`);
   
   users = () => this.db.ref('users');
 
   // *** User API ***
 
-  message = uid => this.db.ref(`messages/${uid}`);
+  meditation = uid => this.db.ref(`meditations/${uid}`);
 
-  messages = () => this.db.ref('messages');
+  meditations = () => this.db.ref('meditations');
 
   // *** Merge Auth and DB User API * **
 

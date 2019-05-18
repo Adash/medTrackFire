@@ -5,6 +5,7 @@ const Header = (props) => {
   return (
     <header className="header">
     <h2 className="logo">MedTrack<span style={{color:"yellow"}}>Fire</span></h2>
+    {props.loading && <span>Loading ...</span>}
     <button 
       type="button" 
       className="btn btn-outline-light btn-sm navbutton"
