@@ -1,0 +1,17 @@
+.medform {
+  padding: 10px;
+  width: 97%;
+  background-color: #2765B2; 
+  color: #DEEBF9;
+  border-radius: 7px;
+  /* related to popping up */
+  z-index: 9;
+  position: fixed;
+  width: 230px;
+  height: 325px;
+  top: 46px;
+  right: -844px;
+  left: 0;
+
+  margin: auto;
+}

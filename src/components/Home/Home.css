@@ -2,22 +2,6 @@
   font-family: Helvetica;
 }
 
-.header {
-  grid-area: hd;
-  font-family:futura;
-  background-color: #2765B2;
-  color: #DEEBF9; 
-  width: 100%;
-  z-index: 4;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 34px;
-  grid-template-areas: "lg lg . . . . . . . . nvbt .";
-  justify-items: center;
-}
-
 .medbox {
   grid-area: mb;
   display: grid;
@@ -37,23 +21,6 @@
   align-self: start;
 }
 
-.medform {
-  padding: 10px;
-  width: 97%;
-  background-color: #2765B2; 
-  color: #DEEBF9;
-  border-radius: 7px;
-  /* related to popping up */
-  z-index: 9;
-  position: fixed;
-  width: 230px;
-  height: 325px;
-  top: 46px;
-  right: -844px;
-  left: 0;
-
-  margin: auto;
-}
 
 .footer {
   grid-area: ft;

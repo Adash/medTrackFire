@@ -1,12 +1,10 @@
 import React from 'react';
+import './header.css';
 
 const Header = (props) => {
   return (
     <header className="header">
-    <h2 className="logo">MedTrack</h2>
-    <button className="btn btn-warning" 
-            onClick={ props.testReducers }
-    >test</button>
+    <h2 className="logo">MedTrack<span style={{color:"yellow"}}>Fire</span></h2>
     <button 
       type="button" 
       className="btn btn-outline-light btn-sm navbutton"

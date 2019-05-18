@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './formElement.css';
 
 class FormElement extends Component {
 

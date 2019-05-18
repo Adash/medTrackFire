@@ -1,0 +1,16 @@
+.header {
+  grid-area: hd;
+  font-family:futura;
+  background-color: #2765B2;
+  color: #DEEBF9; 
+  width: 100%;
+  z-index: 4;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 34px;
+  grid-template-areas: "lg lg . . . . . . . . nvbt .";
+  justify-items: center;
+}

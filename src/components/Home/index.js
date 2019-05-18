@@ -3,6 +3,7 @@ import './Home.css';
 import TrackerBox from '../TrackerBox';
 import DisplayHistory from '../DisplayHistory';
 import FormElement from '../FormElement';
+import Header from '../Header';
 import inData from '../../inData';
 
 class Home extends Component {
@@ -108,16 +109,10 @@ class Home extends Component {
 
     return (
       <div className="App container">
-        <header className="header">
-        <h2 className="logo">MedTrack</h2>
-        <button 
-          type="button" 
-          className="btn btn-outline-light btn-sm navbutton"
-          onClick={ this.toggleForm }  
-        >
-          { this.state.showForm ? "Hide": "Show" } Form
-        </button>
-        </header>        
+        <Header 
+          toggleForm={ this.toggleForm }
+          showForm={ this.state.showForm }
+        />      
         <TrackerBox 
           meditations= { meditations }  
           addNewValue= { this.addNewValue }
