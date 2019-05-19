@@ -16,12 +16,6 @@ class FormElement extends Component {
     this.setState({
       [fieldName]: value
     });
-        // if ( isNaN(value) === false ) {
-        // this.setState({
-        //     name: name,
-        //     type: type,
-        //     repetitions: repetitions 
-        // }); 
   }
 
   handleSubmit = () => {

@@ -4,8 +4,7 @@ class TrackerBox extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-    }
+    this.state = {}
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
@@ -13,7 +12,6 @@ class TrackerBox extends Component {
   }
 
   handleSubmit(thisMed){
-//  const newValue = parseInt(this.state.newRepValue, 10);
     this.props.addNewValue(this.state[thisMed.uid], thisMed);
 }
 
@@ -34,6 +32,7 @@ class TrackerBox extends Component {
         const thisMed = this.props.meditations[key];
         const { uid } = thisMed;
         const inputField = this.state[uid] ? this.state[uid] : ''
+        
         return (
           <div 
             key={uid} 

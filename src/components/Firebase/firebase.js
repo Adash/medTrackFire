@@ -34,6 +34,12 @@ class Firebase {
 
   meditations = () => this.db.ref('meditations');
 
+  getReps = uid => this.db.ref(`meditations/${uid}/repetitions`);
+
+  historyElement = uid => this.db.ref(`history/${uid}`);
+
+  history = () => this.db.ref('history');
+
   // *** Merge Auth and DB User API * **
 
   fbAuthUserListener = (next, fallback) => 
