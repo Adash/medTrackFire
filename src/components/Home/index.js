@@ -4,6 +4,7 @@ import TrackerBox from '../TrackerBox';
 import DisplayHistory from '../DisplayHistory';
 import FormElement from '../FormElement';
 import Header from '../Header';
+import Footer from '../Footer';
 import { withFirebase } from '../Firebase';
 
 class HomeBase extends Component {
@@ -128,7 +129,7 @@ class HomeBase extends Component {
           />
           : null
         }
-        <footer className="footer"> Footer  </footer>
+        <Footer />
       </div>
     );
   }
