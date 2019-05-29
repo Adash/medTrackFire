@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Home.css';
+import './home.css';
 import TrackerBox from '../TrackerBox';
 import DisplayHistory from '../DisplayHistory';
 import FormElement from '../FormElement';
@@ -97,7 +97,7 @@ class HomeBase extends Component {
   }
 
   componentWillUnmount() {
-    this.props.firebase.messages().off();
+    this.props.firebase.meditations().off();
     this.props.firebase.history().off()
   }
 

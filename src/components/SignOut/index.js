@@ -1,14 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
 
 const SignOutButton = ({firebase}) => (
-  <button
-    className="btn btn-outline-warning"
+  <Link
+    to="#"
+    className="nav-link"
     onClick={ firebase.fbSignOut }
   >
     Sign Out
-  </button>
+  </Link>
 )
 
 export default withFirebase(SignOutButton);
