@@ -15,11 +15,11 @@ import { withFirebase } from '../Firebase';
 
 const INITIAL_GRAPH_DATA = [
   {
-    meditationName: "a",
+    name: "a",
     repetitions: 0,
   },
   {
-    meditationName: "b",
+    name: "b",
     repetitions: 0,
   },
 ]
@@ -40,8 +40,7 @@ const StatsBase = (props) => {
           ...snapshotObject[key],
           uid: key,
         }));
-        //setGraphData({[target]: snapshotList});
-        console.log(snapshotList);
+        setGraphData(transformData(snapshotList));
         //this.setState({[loadingLabel]: false});
       } else {
         //this.setState({[loadingLabel]: false});
@@ -57,6 +56,13 @@ const StatsBase = (props) => {
 
   function readData() {
     console.log(graphData);
+  }
+
+  function transformData(data) {
+    return data.map(currentObject => ({
+      name: currentObject.meditationName,
+      repetitions: currentObject.repetitions
+    }));
   }
 
   function componentWillUnmount() {
