@@ -8,10 +8,11 @@ import {
   Legend,
   Bar
 } from "recharts";
-
-import Header from '../Header';
+import { Link } from 'react-router-dom'
 import Footer from '../Footer';
 import { withFirebase } from '../Firebase';
+
+import * as ROUTES from '../../constants/routes'
 
 const INITIAL_GRAPH_DATA = [
   {
@@ -26,10 +27,11 @@ const INITIAL_GRAPH_DATA = [
 
 const StatsBase = (props) => {
   const [graphData, setGraphData] = useState(INITIAL_GRAPH_DATA);
+  const [graphDataTwo] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  fetch = (callback, target) => {
-    const loadingLabel = `loading${target}`
-    //this.setState({[loadingLabel]: true});
+  const fetch = (callback, target, transformer) => {
+    setLoading(`loading ${target}`);
   
     callback().on('value', snapshot => {
       const snapshotObject = snapshot.val();
@@ -40,22 +42,23 @@ const StatsBase = (props) => {
           ...snapshotObject[key],
           uid: key,
         }));
-        setGraphData(transformData(snapshotList));
-        //this.setState({[loadingLabel]: false});
+        setGraphData(transformer(snapshotList));
+        console.log(snapshotList)
+        setLoading(false);
       } else {
-        //this.setState({[loadingLabel]: false});
+        setLoading(`unable to load ${target}`);
       }
     });
   }
 
   //function componentDidMount() {
-  function fetchData() {
-    fetch(props.firebase.meditations, 'meditations');
-    //this.fetch(this.props.firebase.history, 'history');
+  function fetchCurrent() {
+    fetch(props.firebase.meditations, 'meditations', transformData);
   }
 
-  function readData() {
-    console.log(graphData);
+  function fetchHistory() {
+    fetch(props.firebase.history, 'history', transformDataHistory);
+    //this.fetch(this.props.firebase.history, 'history');
   }
 
   function transformData(data) {
@@ -65,24 +68,38 @@ const StatsBase = (props) => {
     }));
   }
 
-  function componentWillUnmount() {
-    props.firebase.meditations().off();
-    //this.props.firebase.history().off()
+
+  function transformDataHistory(data) {
+    return data.map(currentObject => ({
+      name: currentObject.name,
+      repetitions: currentObject.repetitions
+    }));
   }
 
+  // function componentWillUnmount() {
+  //   props.firebase.meditations().off();
+  //   //this.props.firebase.history().off()
+  // }
+
   return (
-    <>
+    <div className="history_container">
       <h4>Stats Component</h4>
+      <Link 
+        className="nav-link"
+        to={ ROUTES.HOME }>
+          Home
+      </Link>
       <button 
         className="btn btn-primary"
-        onClick={ fetchData }
-      >Fetch Data
+        onClick={ fetchCurrent }
+      >Show current repetitions
       </button>
       <button 
         className="btn btn-secondary"
-        onClick={ readData }
-      >read Data
+        onClick={ fetchHistory }
+      >Show history
       </button>
+      { loading && <p>{loading}</p> }
       <BarChart width={800} height={350} data={graphData}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
@@ -91,7 +108,18 @@ const StatsBase = (props) => {
         <Legend />
         <Bar dataKey="repetitions" fill="#8884d8" />
       </BarChart>
-    </>
+      { graphDataTwo === false ? <p>Waiting for additional graph data</p> :
+        (<BarChart width={800} height={350} data={graphDataTwo}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="repetitions" fill="#8884d8" />
+        </BarChart>)
+      }
+        <Footer />
+    </div>
   )
 }
 
