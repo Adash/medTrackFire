@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './app.css' // global css override
 
 import HomePage from '../Home';
 import LandingPage from '../Landing';
