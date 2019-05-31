@@ -1,13 +1,9 @@
 import React from 'react';
-import SignOutButton from '../SignOut';
-import GoToStatsButton from '../Navigation/GoToStats';
+import './footer.css';
 
 const Footer = () => (
-    <footer className="footer navbar-expand-lg">  
-      <ul className="navbar-nav ">
-        <SignOutButton />
-        <GoToStatsButton />
-      </ul>
+    <footer className="footer">  
+
     </footer>
   )
 

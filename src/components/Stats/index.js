@@ -8,11 +8,11 @@ import {
   Legend,
   Bar
 } from "recharts";
-import { Link } from 'react-router-dom'
+import Header from '../Header';
 import Footer from '../Footer';
 import { withFirebase } from '../Firebase';
 
-import * as ROUTES from '../../constants/routes'
+import './stats.css'
 
 const INITIAL_GRAPH_DATA = [
   {
@@ -82,42 +82,45 @@ const StatsBase = (props) => {
   // }
 
   return (
-    <div className="history_container">
-      <h4>Stats Component</h4>
-      <Link 
-        className="nav-link"
-        to={ ROUTES.HOME }>
-          Home
-      </Link>
-      <button 
-        className="btn btn-primary"
-        onClick={ fetchCurrent }
-      >Show current repetitions
-      </button>
-      <button 
-        className="btn btn-secondary"
-        onClick={ fetchHistory }
-      >Show history
-      </button>
-      { loading && <p>{loading}</p> }
-      <BarChart width={800} height={350} data={graphData}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="repetitions" fill="#8884d8" />
-      </BarChart>
-      { graphDataTwo === false ? <p>Waiting for additional graph data</p> :
-        (<BarChart width={800} height={350} data={graphDataTwo}>
+    <div className="App stats_container">
+      <Header />
+      <div className="buttonz">
+        <button 
+          className="btn btn-outline-primary"
+          onClick={ fetchCurrent }
+        >Show current repetitions
+        </button>
+        <button 
+          className="btn btn-outline-secondary"
+          onClick={ fetchHistory }
+        >Show history
+        </button>
+      </div>
+      <div className="loading">
+        { loading && <>{loading}</> }
+      </div>
+      <div className="bar_chart_one">
+        <BarChart width={800} height={350} data={graphData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
           <Legend />
           <Bar dataKey="repetitions" fill="#8884d8" />
-        </BarChart>)
+        </BarChart>
+      </div>
+      <div className="bar_chart_two">
+        { graphDataTwo === false ? <p>Waiting for additional graph data</p> :
+          (<BarChart width={800} height={350} data={graphDataTwo}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="repetitions" fill="#8884d8" />
+          </BarChart>)
       }
+      </div>
         <Footer />
     </div>
   )

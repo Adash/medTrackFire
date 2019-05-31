@@ -1,0 +1,9 @@
+.footer {
+  grid-area: ft;
+  font-family:futura;
+  background-color: #2765B2; 
+  color: lightblue; 
+  width: 100%;
+  z-index: 4;
+  padding: 5px;
+}

@@ -7,10 +7,39 @@
   z-index: 4;
   padding-top: 3px;
   padding-bottom: 3px;
-  padding-left: 10px;
+  padding-left: 40px;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(11, 1fr);
   grid-template-rows: 34px;
   grid-template-areas: "lg lg . . . . . . . . nvbt .";
   justify-items: center;
+}
+
+.navblock {
+  width: 300px;
+  margin-left: 50px;
+}
+
+.formbutton {
+  width: 90px;
+  height: 35px;
+  margin-right: 10px 
+}
+
+a:link {
+  color: orange;
+}
+
+/* visited link */
+a:visited {
+  color: orange
+}
+
+a:hover {
+  color: yellow;
+}
+
+/* selected link */
+a:active {
+  color: blue;
 }

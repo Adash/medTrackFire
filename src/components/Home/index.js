@@ -106,7 +106,7 @@ class HomeBase extends Component {
     const { meditations, history } = this.state;
 
     return (
-      <div className="App container">
+      <div className="App home_container">
         <Header 
           toggleForm={ this.toggleForm }
           showForm={ this.state.showForm }
