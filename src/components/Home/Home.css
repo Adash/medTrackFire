@@ -35,7 +35,7 @@
   background-color: #DEEBF9;
   padding: 0px;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 40px auto 50px;
+  grid-template-rows: 50px auto 50px;
   grid-template-areas: 
     "hd hd hd hd hd hd hd hd hd hd hd hd"
     "mb mb mb mb mb li li li li li li li"
