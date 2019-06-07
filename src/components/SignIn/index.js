@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
 
 import * as ROUTES from '../../constants/routes';
+import './signin.css'; //override bootstrap button styles
 
 const INITIAL_STATE = {
   email: '',
@@ -51,6 +52,7 @@ class SignInFormBase extends Component {
           onChange={ this.onChange }
           type="email"
           placeholder="email"
+          className="q_input"
         />
         <input 
           name="password"
@@ -58,11 +60,13 @@ class SignInFormBase extends Component {
           onChange={ this.onChange }
           type="password"
           placeholder="password"
+          className="q_input"
         />
         <button 
           disabled={ isInvalid }
           type="submit"
           className="btn btn-primary"
+          id="q_signin_button"
         >
           Log In
         </button>
