@@ -3,7 +3,7 @@ import './home.css';
 import TrackerBox from '../TrackerBox';
 import DisplayHistory from '../DisplayHistory';
 import FormElement from '../FormElement';
-import Header from '../Header';
+import Navbar from '../Navigation/Navbar';
 import Footer from '../Footer';
 import { withFirebase } from '../Firebase';
 
@@ -107,10 +107,11 @@ class HomeBase extends Component {
 
     return (
       <div className="App home_container">
-        <Header 
+        <Navbar 
           toggleForm={ this.toggleForm }
           showForm={ this.state.showForm }
           loading={ this.state.loadingMeditations }
+          user= { this.props.user }
         />      
         <TrackerBox 
           meditations= { meditations }  

@@ -8,7 +8,7 @@ import {
   Legend,
   Bar
 } from "recharts";
-import Header from '../Header';
+import Navbar from '../Navigation/Navbar';
 import Footer from '../Footer';
 import { withFirebase } from '../Firebase';
 
@@ -83,7 +83,7 @@ const StatsBase = (props) => {
 
   return (
     <div className="App stats_container">
-      <Header />
+      <Navbar user={ props.user } />
       <div className="buttonz">
         <button 
           className="btn btn-outline-primary"
