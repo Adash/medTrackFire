@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
+import { AuthUserContext } from '../Session';
 import './app.css' // global css override
 
 import HomePage from '../Home';
@@ -23,25 +24,13 @@ const App = (props) => {
   });
 
   return (
-  <Router> 
- 
-    <Route 
-      exact path={ROUTES.LANDING}
-      render={routeProps => (
-        <LandingPage {...routeProps} user={user} />
-      )} 
-    />
-    <Route 
-      path={ROUTES.HOME} render={routeProps => (
-        <HomePage {...routeProps} user={user} />
-      )} 
-    />
-    <Route 
-      path={ROUTES.STATS} render={routeProps => (
-        <Stats {...routeProps} user={user} />
-      )}  />
-
-  </Router>
+    <AuthUserContext.Provider value={ user }>
+      <Router> 
+        <Route exact path={ROUTES.LANDING} component={LandingPage} />
+        <Route path={ROUTES.HOME} component={HomePage}/>
+        <Route path={ROUTES.STATS} component={Stats}  />
+      </Router>
+    </AuthUserContext.Provider>
   )
 }
 

@@ -1,9 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SignOutButton from '../SignOut';
+import { AuthUserContext } from '../Session';
 
 import * as ROUTES from '../../constants/routes';
 import './header.css';
+
+const NavAuth = () => (
+  <>
+    <Link className="nav-link" to={ROUTES.HOME}>Home</Link>
+    <Link className="nav-link" to={ROUTES.STATS}>Stats</Link>
+    <SignOutButton />
+  </>
+)
+
+const NavNonAuth = () => (
+  <Link className="nav-link" to={ROUTES.LANDING}>Log in</Link>
+)
 
 const Navbar = (props) => {
   return (
@@ -12,16 +25,9 @@ const Navbar = (props) => {
     {props.loading && <span>Loading ...</span>}
     <div className="navblock navbar-expand-lg">
       <ul className="navbar-nav ">
-        {props.user ? (
-          <>
-            <Link className="nav-link" to={ROUTES.HOME}>Home</Link>
-            <Link className="nav-link" to={ROUTES.STATS}>Stats</Link>
-            <SignOutButton />
-          </>
-        ) : (
-          <Link className="nav-link" to={ROUTES.LANDING}>Log in</Link>
-        )
-        }
+        <AuthUserContext.Consumer>
+          { user => (user ? <NavAuth /> : <NavNonAuth />)}
+        </AuthUserContext.Consumer>
       </ul>
     </div>
     { props.toggleForm &&
