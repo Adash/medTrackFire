@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withFirebase } from '../Firebase';
+import { PasswordForgetLink } from '../PasswordForget';
 
 import * as ROUTES from '../../constants/routes';
 import './signin.css'; //override bootstrap button styles
@@ -66,10 +67,11 @@ class SignInFormBase extends Component {
           disabled={ isInvalid }
           type="submit"
           className="btn btn-primary"
-          id="q_signin_button"
+          id="q_login_button"
         >
           Log In
         </button>
+        <PasswordForgetLink />
 
         { error && <p>{error.message}</p> }
       </form>

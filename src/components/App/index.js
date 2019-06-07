@@ -7,6 +7,7 @@ import './app.css' // global css override
 import HomePage from '../Home';
 import LandingPage from '../Landing';
 import Stats from '../Stats';
+import PasswordForgetPage from '../PasswordForget';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
         <Route path={ROUTES.HOME} component={HomePage}/>
         <Route path={ROUTES.STATS} component={Stats}  />
+        <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
       </Router>
   )
 }
