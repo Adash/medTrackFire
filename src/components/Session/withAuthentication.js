@@ -12,7 +12,7 @@ const withAuthentication = Component => {
           ? setUser(authUser)
           : setUser(null); 
       });
-      console.log(user)
+      //console.log(user)
       return () => listener(); // remove listener using hooks (effect) api
     });  
 

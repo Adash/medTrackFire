@@ -19,7 +19,7 @@ class FormElement extends Component {
   }
 
   handleSubmit = () => {
-    this.props.handleFormSubmit(this.state);
+    this.props.handleFormSubmit(this.state, this.props.user);
   }
 
   render() {

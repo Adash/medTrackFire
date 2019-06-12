@@ -12,7 +12,7 @@ class TrackerBox extends Component {
   }
 
   handleSubmit(thisMed){
-    this.props.addNewValue(this.state[thisMed.uid], thisMed);
+    this.props.addNewValue(this.state[thisMed.uid], thisMed, this.props.user);
 }
 
   onKeyPress(event, thisMed){

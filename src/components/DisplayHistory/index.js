@@ -3,7 +3,9 @@ import React, { Component } from 'react';
 class DisplayHistory extends Component {
     
   render() {
-    const history = this.props.history.map((value, entryNo) => {
+    const userID = this.props.uid;
+    const currentUserHistory = this.props.history.filter( element => element.userID !== userID );
+    const history = currentUserHistory.map((value, entryNo) => {
       const { uid, repetitions, name, date, medKey } = value;
 
       return (
