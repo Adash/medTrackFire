@@ -6,12 +6,16 @@ import * as ROUTES from '../../constants/routes';
 
 const INITIAL_STATE = {
   EMAIL: '',
+  PASSWORDONE: '',
+  PASSWORDTWO: '',
   ERROR: null,
   SENT: false,
 }
 
-const PasswordForgetFormBase = (props) => {
+const SignUpFormBase = (props) => {
   const [email, setEmail] = useState(INITIAL_STATE.EMAIL);
+  const [passwordOne, setPasswordOne] = useState(INITIAL_STATE.PASSWORDONE);
+  const [passwordTwo, setPasswordTwo] = useState(INITIAL_STATE.PASSWORDTWO);
   const [error, setError] = useState(INITIAL_STATE.ERROR);
   const [sent, setSent] = useState(INITIAL_STATE.SENT);
 
@@ -39,6 +43,14 @@ const PasswordForgetFormBase = (props) => {
     setEmail(event.target.value);
   }
 
+  const onPasswordOneChange = event => {
+    setPasswordOne(event.target.value);
+  }
+
+  const onPasswordTwoChange = event => {
+    setPasswordTwo(event.target.value)
+  }
+
   const isInvalid = email === '';
 
   return (
@@ -51,23 +63,39 @@ const PasswordForgetFormBase = (props) => {
         placeholder="email"
         className="q_input"
       />
+      <input 
+        name="passwordOne"
+        value={ passwordOne }
+        onChange={ onPasswordOneChange }
+        type="text"
+        placeholder="password"
+        className="q_input"
+      />
+      <input 
+        name="passwordTwo"
+        value={ passwordTwo }
+        onChange={ onPasswordTwoChange }
+        type="text"
+        placeholder="retype passowrd"
+        className="q_input"
+      />
       <button 
         disabled={ isInvalid }
         className="btn btn-secondary"
         type="submit"
         id="main_button"
-      >Reset Password
+      >Sign Up
       </button>
       <p><Link id="q_login_link"  to={ROUTES.LANDING} >Log in</Link></p>
 
       { error && <p>{ error.message }</p> }
-      { sent && <p style={{ color: 'yellow' }}>Password reset email sent</p> }
+      { sent && <p style={{ color: 'yellow' }}>Signing up...</p> }
     </form>
 
   )
 }
 
-const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
+const SignUpFormForm = withFirebase(SignUpFormBase);
 
-export default PasswordForgetForm;
+export default SignUpFormForm;
 

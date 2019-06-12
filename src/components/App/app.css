@@ -1,2 +1,18 @@
  /* global CSS override */
 .card, .btn, .form-control { border-radius: 0; }
+
+#main_button {
+  background-color: rgb(20, 51, 90);
+  mix-blend-mode: multiply;
+  opacity: 1;
+  height: 32px;
+  margin:0 0 0 0;
+  line-height: 0;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: -3px;
+}
+
+#main_button:disabled {
+  opacity: 0.6;
+}

@@ -1,18 +1,3 @@
-#q_login_button {
-  background-color: rgb(20, 51, 90);;
-  mix-blend-mode: multiply;
-  opacity: 1;
-  height: 32px;
-  margin:0 0 0 0;
-  line-height: 0;
-  font-weight: 500;
-  font-size: 1.1rem;
-  margin-top: -3px;
-}
-
-#q_signin_button:disabled {
-  opacity: 0.6;
-}
 
 .q_input {
   color: black;

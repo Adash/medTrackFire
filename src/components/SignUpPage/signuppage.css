@@ -1,5 +1,5 @@
-.password_forget_page {
-  background-image: url('./snow.jpg');
+.sign_up_page {
+  background-image: url('./beach.jpg');
   height: 100vh;
   background-size: 100%;
   background-position: center;
@@ -52,6 +52,11 @@
   font-weight: 500;
   font-size: 1.1rem;
   margin-top: -3px;
+}
+
+#q_psw_forget_link {
+  color: rgb(20, 51, 90);
+  opacity: 0.4;
 }
 
 #q_psw_forget_link:hover {

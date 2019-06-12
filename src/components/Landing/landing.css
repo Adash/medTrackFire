@@ -25,3 +25,14 @@
 .signinform-container {
   margin: auto; 
 }
+
+#reset_link {
+  color: rgb(20, 51, 90);
+  opacity: 0.6;
+  margin-right: 10px;
+}
+
+#signup_link {
+  color: rgb(20, 51, 90);
+  opacity: 0.6;
+}

@@ -8,6 +8,7 @@ import HomePage from '../Home';
 import LandingPage from '../Landing';
 import Stats from '../Stats';
 import PasswordForgetPage from '../PasswordForget';
+import SignUpPage from '../SignUpPage';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -18,6 +19,7 @@ const App = () => {
         <Route path={ROUTES.HOME} component={HomePage}/>
         <Route path={ROUTES.STATS} component={Stats}  />
         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
+        <Route path={ROUTES.SIGN_UP} component={SignUpPage}  />
       </Router>
   )
 }
