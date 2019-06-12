@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
 class DisplayHistory extends Component {
-    
+  
   render() {
-    const userID = this.props.uid;
-    const currentUserHistory = this.props.history.filter( element => element.userID !== userID );
-    const history = currentUserHistory.map((value, entryNo) => {
+    const userID = this.props.user.uid;
+    const history = this.props.history
+    .filter( element => element.userID === userID )
+    .map((value, entryNo) => {
       const { uid, repetitions, name, date, medKey } = value;
 
       return (
