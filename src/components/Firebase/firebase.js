@@ -29,7 +29,10 @@ class Firebase {
   users = () => this.db.ref('users');
 
   // *** User API ***
+  fbCreateUser = (email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password)
 
+  // *** Meditation API ***
   meditation = uid => this.db.ref(`meditations/${uid}`);
 
   meditations = () => this.db.ref('meditations');

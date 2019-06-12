@@ -19,24 +19,26 @@ const SignUpFormBase = (props) => {
   const [error, setError] = useState(INITIAL_STATE.ERROR);
   const [sent, setSent] = useState(INITIAL_STATE.SENT);
 
+  const resetConst = () => {
+    setEmail(INITIAL_STATE.EMAIL);
+    setPasswordOne(INITIAL_STATE.PASSWORDONE);
+    setPasswordTwo(INITIAL_STATE.PASSWORDTWO);
+    setError(INITIAL_STATE.ERROR);
+    setSent(true);
+  }
   const onSubmit = event => {
     event.preventDefault();
 
-    props.firebase.auth
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        setEmail(INITIAL_STATE.EMAIL);
-        setError(INITIAL_STATE.ERROR);
-        setSent(true);
+    props.firebase
+      .fbCreateUser(email, passwordOne)
+      .then(authUser => {
+        resetConst();
         setTimeout(
           () => props.history.push(ROUTES.LANDING),
           1500
         );
-
       })
-      .catch(error => {
-        setError(error);
-      })
+      .catch(error => {setError(error)});
   }
 
   const onChange = event => {
@@ -51,7 +53,10 @@ const SignUpFormBase = (props) => {
     setPasswordTwo(event.target.value)
   }
 
-  const isInvalid = email === '';
+  const isInvalid = 
+    passwordOne !== passwordTwo ||
+    passwordOne === '' ||
+    email === '';
 
   return (
     <form onSubmit={ onSubmit } >
@@ -67,7 +72,7 @@ const SignUpFormBase = (props) => {
         name="passwordOne"
         value={ passwordOne }
         onChange={ onPasswordOneChange }
-        type="text"
+        type="password"
         placeholder="password"
         className="q_input"
       />
@@ -75,8 +80,8 @@ const SignUpFormBase = (props) => {
         name="passwordTwo"
         value={ passwordTwo }
         onChange={ onPasswordTwoChange }
-        type="text"
-        placeholder="retype passowrd"
+        type="password"
+        placeholder="confirm passowrd"
         className="q_input"
       />
       <button 
