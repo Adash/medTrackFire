@@ -111,7 +111,6 @@ class HomeBase extends Component {
           toggleForm={ this.toggleForm }
           showForm={ this.state.showForm }
           loading={ this.state.loadingMeditations }
-          user= { this.props.user }
         />      
         <TrackerBox 
           meditations= { meditations }  
