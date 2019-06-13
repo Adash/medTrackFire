@@ -60,7 +60,7 @@ class HomeBase extends Component {
       meditationName: input.name,
       meditationType: input.type,
       repetitions: repetitions,
-      userId: user.uid
+      userID: user.uid
     }
      
     this.props.firebase.meditations().push(newMeditation);

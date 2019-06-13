@@ -25,11 +25,26 @@ class TrackerBox extends Component {
     const value = parseInt(event.target.value, 10)
     this.setState({[uid]: value})
   }
+
+  componentDidMount() {
+    setTimeout(
+      () => console.log(this.props.meditations),
+      2000
+    );
+  }
     
   render() {
-    const meditations = Object.keys(this.props.meditations).map(
-      (key)=> {
-        const thisMed = this.props.meditations[key];
+    const userID = this.props.user.uid;
+    // the commented code below is kept temporarily for analisys
+    // will be removed soon
+    // const meditations = Object.keys(this.props.meditations)
+    // .filter( element => element.userID === userID )
+    //const meditations = this.props.meditations ? this.props.meditations
+    const meditations = this.props.meditations
+    .filter( element => element.userID === userID )
+    .map(
+      (thisMed, index)=> {
+        //const thisMed = this.props.meditations[key];
         const { uid } = thisMed;
         const inputField = this.state[uid] ? this.state[uid] : ''
         
@@ -41,10 +56,9 @@ class TrackerBox extends Component {
             <h5 className='card-title'> 
               { thisMed.meditationName } </h5>
             <h6 className='card-subtitle mb-2 text-muted'> 
-              { this.props.meditations[key].meditationType } </h6>
+              { thisMed.meditationType } </h6>
             <p className='card-text' > 
-              { this.props.meditations[key].repetitions } </p>
-            
+              { thisMed.repetitions } </p>
             <div className="input-group mb-3">
               <input
                 className="form-control"
@@ -66,7 +80,7 @@ class TrackerBox extends Component {
           </div>
         )
       }            
-    );
+    )
     
     return (
       <div className="medbox">
