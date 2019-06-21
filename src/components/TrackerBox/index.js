@@ -76,6 +76,12 @@ class TrackerBox extends Component {
                   > add mantras 
                 </button>
               </div>
+              <button 
+                  className='btn btn-outline-danger'
+                  onClick={ ()=> this.props.removeMedbox(uid)}
+                >
+                  remove
+                </button>
             </div>
           </div>
         )

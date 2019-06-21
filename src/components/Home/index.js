@@ -66,6 +66,11 @@ class HomeBase extends Component {
     this.props.firebase.meditations().push(newMeditation);
   }
 
+  removeMedbox = (uid) => {
+    this.props.firebase.meditation(uid).remove();
+    // console.log(uid)
+  }
+
   toggleForm = () => {
     this.setState({
       showForm: !this.state.showForm
@@ -121,7 +126,8 @@ class HomeBase extends Component {
             meditations= { meditations }  
             addNewValue= { this.addNewValue }
             handleKeyPress= { this.handleKeyPress }
-            handleNewValueChange= {this.handleNewValueChange}
+            handleNewValueChange= { this.handleNewValueChange }
+            removeMedbox= { this.removeMedbox }
             user={ user }
           />
           <DisplayHistory
