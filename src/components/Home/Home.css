@@ -2,16 +2,6 @@
   font-family: Helvetica;
 }
 
-.medbox {
-  grid-area: mb;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(auto-fill, 200px);
-  grid-gap: 5px;
-  padding: 5px;
-  justify-items: right;
-}
-
 .medlist {
   grid-area: li;
   width: 90%;

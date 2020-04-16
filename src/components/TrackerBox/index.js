@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'styled-components/macro';
 
 class TrackerBox extends Component {
   constructor(props) {
@@ -89,7 +90,15 @@ class TrackerBox extends Component {
     )
     
     return (
-      <div className="medbox">
+      <div css={`
+        grid-area: mb;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(auto-fill, 200px);
+        grid-gap: 5px;
+        padding: 5px;
+        justify-items: right;
+      `} >
         { meditations }
       </div>
     )
