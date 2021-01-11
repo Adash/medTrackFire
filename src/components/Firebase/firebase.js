@@ -14,43 +14,41 @@ class Firebase {
 
   // *** Auth API ***
 
-
-  fbSignIn = (email, password) => (
-    this.auth.signInWithEmailAndPassword(email, password)
-  )
+  fbSignIn = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
 
   fbSignOut = () => {
     console.log('signed out');
-    return this.auth.signOut()
+    return this.auth.signOut();
   };
 
-  user = uid => this.db.ref(`users/${uid}`);
-  
+  user = (uid) => this.db.ref(`users/${uid}`);
+
   users = () => this.db.ref('users');
 
   // *** User API ***
   fbCreateUser = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password)
+    this.auth.createUserWithEmailAndPassword(email, password);
 
   // *** Meditation API ***
-  meditation = uid => this.db.ref(`meditations/${uid}`);
+  meditation = (uid) => this.db.ref(`meditations/${uid}`);
 
   meditations = () => this.db.ref('meditations');
 
-  getReps = uid => this.db.ref(`meditations/${uid}/repetitions`);
+  getReps = (uid) => this.db.ref(`meditations/${uid}/repetitions`);
 
-  historyElement = uid => this.db.ref(`history/${uid}`);
+  historyElement = (uid) => this.db.ref(`history/${uid}`);
 
   history = () => this.db.ref('history');
 
   // *** Merge Auth and DB User API * **
 
-  fbAuthUserListener = (next, fallback) => 
-    this.auth.onAuthStateChanged(authUser => {
-      if(authUser) {
-          this.user(authUser.uid)
+  fbAuthUserListener = (next, fallback) =>
+    this.auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        this.user(authUser.uid)
           .once('value')
-          .then(snapshot => {
+          .then((snapshot) => {
             const dbUser = snapshot.val();
 
             // default empty roles
@@ -63,14 +61,14 @@ class Firebase {
               uid: authUser.uid,
               email: authUser.email,
               ...dbUser,
-            }
+            };
 
             next(authUser);
           });
       } else {
         fallback();
       }
-    }); 
+    });
 }
 
 export default Firebase;
